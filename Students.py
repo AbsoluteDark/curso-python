@@ -56,4 +56,8 @@ if __name__ == '__main__':
     for llave,valor in diccio.iteritems():
         if valor['edad']<21:
             msj = 'el {0} de {1}, es de la ciudad de {2} y cursa {3} de la universidad'
-print msj.format(llave,valor['edad'],valor['ciudad'],valor['anio'])
+            print msj.format(llave,valor['edad'],valor['ciudad'],valor['anio'])
+            f = open('Students.txt', 'a')
+            f.write(mensaje.format(llave,valor['edad'], valor['ciudad'], valor['anio']))
+            f.close()
+            
