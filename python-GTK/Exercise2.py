@@ -3,15 +3,15 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
 class MiVentana(Gtk.Window):
-	def __init__(self, *args, **kwargs)
-	super(MiVentana, self).__init__(*args, **kwargs)
-	self.set_default_size(500, 300)
-	self.connect('delete-event', Gtk.main_quit)
-
-	self.agregar_contenedor()
-	self.agregar_entrada()
-	self.agregar_boton()
-	self.agregar_lista()
+	def __init__(self, *args, **kwargs):
+		super(MiVentana, self).__init__(*args, **kwargs)
+		self.set_default_size(500, 300)
+		self.connect('delete-event', Gtk.main_quit)
+		self.agregar_contenedor()
+		self.agregar_entrada()
+		self.agregar_boton()
+		self.agregar_lista()
+		#self.agregar_fila()
 
 	def agregar_contenedor(self):
 		self.contenedor = Gtk.Grid()
@@ -32,23 +32,12 @@ class MiVentana(Gtk.Window):
 			1
 			)
 
+		self.boton.connect('clicked', self.agregar_fila)
+
 	def agregar_lista(self):	
-		"""Crea un TreeView
-		1- Crear el model de datos Gtk.ListStore(type, type, ..., type)
-		2- Crear el WIdget q contiene o muestra los datos de modelo.
-		TreeView(<model>)
-		3- Definir las columnas y su contenido
-		3.1- Crear Celda para cada columna de la fila.
-		Los CellRender son widget q sirven to mostrar contenido dentro
-		de otros widgets dependiendo de su tipo.
-		3.2- Crear Columnas(TreeViewColumn) del TreeView q mostraran los datos
-		usando CellRenderer widgets como elementos hijos.
-		args: (Titulo, cellRenderer, posicion en el modelo de la info a mostrar).
-		3.3- Agregar cada TreeViewColumn al TreeView widget.
-		"""
 
 		self.modelo = Gtk.ListStore(str, float)
-		#self.modelo.append(['Valor_1', 1.5])
+		self.modelo.append(['Valor_1', 1.5])
 		self.lista_archivos = Gtk.TreeView(self.modelo)
 
 		descripcion = Gtk.CellRendererText()
@@ -67,7 +56,14 @@ class MiVentana(Gtk.Window):
 			1,
 			1)
 
+		self.modelo.append(['Valor_1', 1.5])
+
+	def agregar_fila(self, btn):	
+		text = self.entrada.get_text()
+		self.modelo.append([text, 1.5])
+
 if __name__ == '__main__':	
 	ventana = MiVentana()
 	ventana.show_all()
 	Gtk.main()
+	
