@@ -20,6 +20,8 @@ class MiVentana(Gtk.Window):
 
 	def agregar_entrada(self):	
 		self.entrada = Gtk.Entry()
+		self.entrada_monto = Gtk.Entry()
+		self.contenedor.attach(self.entrada_monto, 3, 0, 1, 1)
 		self.contenedor.attach(self.entrada, 0, 0, 1, 1)
 
 	def agregar_boton(self):
@@ -37,7 +39,7 @@ class MiVentana(Gtk.Window):
 	def agregar_lista(self):	
 
 		self.modelo = Gtk.ListStore(str, float)
-		self.modelo.append(['Valor_1', 1.5])
+		#self.modelo.append(['Valor_1', 1.5])
 		self.lista_archivos = Gtk.TreeView(self.modelo)
 
 		descripcion = Gtk.CellRendererText()
@@ -56,11 +58,14 @@ class MiVentana(Gtk.Window):
 			1,
 			1)
 
-		self.modelo.append(['Valor_1', 1.5])
+		#self.modelo.append(['Valor_1', 1.5])
 
 	def agregar_fila(self, btn):	
 		text = self.entrada.get_text()
-		self.modelo.append([text, 1.5])
+		monto = self.entrada_monto.get_text()
+		self.modelo.append([text, float(monto)])
+		
+		
 
 if __name__ == '__main__':	
 	ventana = MiVentana()
