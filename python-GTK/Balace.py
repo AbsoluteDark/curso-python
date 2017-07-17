@@ -14,9 +14,9 @@ class MiVentanita(Gtk.Window):
 		self.add_botonP()
 		self.add_listaA()
 		self.add_listaP()
-		#self.add_labelA()
-		#self.add_labelP()
-		#self.add_labelC()
+		self.add_labelA()
+		self.add_labelP()
+		self.add_labelC()
 
 	def add_contenedor(self):	
 		self.contenedor = Gtk.Grid()
@@ -30,14 +30,33 @@ class MiVentanita(Gtk.Window):
 		self.entrada1 = Gtk.Entry()
 		self.contenedor.attach(self.entrada1, 3, 0, 1, 1)
 
-	#def add_labelA(self):	
-		#self.labelA = 
+	def add_labelA(self):	
+		self.labelA = Gtk.Label('Sumatoria_Activos')
+		self.contenedor.attach(self.labelA, 3, 1, 1, 1)
+		
+		temp = 0
+		for lista_A in self.modeloA:
+			total = float(lista_A[1])
+			temp += total
+
+		print temp
+		mensaje = 'Sumatoria_Activos {0}'
+		self.labelA.set_text(mensaje.format(str(temp)))
+
 
 	def add_entradaP(self):	
 		self.entradaP = Gtk.Entry()
-		self.contenedor.attach(self.entradaP, 0, 20, 3, 1)
+		self.contenedor.attach(self.entradaP, 0, 5, 3, 1)
 		self.entrada2 = Gtk.Entry()
-		self.contenedor.attach(self.entrada2, 3, 20, 1, 1)
+		self.contenedor.attach(self.entrada2, 3, 5, 1, 1)
+
+	def add_labelP(self):	
+		self.labelP = Gtk.Label('Sumatoria_Pasivos')
+		self.contenedor.attach(self.labelP, 3, 6, 1, 1)
+
+	def add_labelC(self):	
+		self.labelC = Gtk.Label('Total_Capital')
+		self.contenedor.attach(self.labelC, 3, 8, 1, 1)
 
 	def add_botonA(self):	
 		self.botonA = Gtk.Button('Activos')
