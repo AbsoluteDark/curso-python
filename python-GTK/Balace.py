@@ -14,9 +14,9 @@ class MiVentanita(Gtk.Window):
 		self.add_botonP()
 		self.add_listaA()
 		self.add_listaP()
-		self.add_labelA()
-		self.add_labelP()
-		self.add_labelC()
+		#self.add_labelA()
+		#self.add_labelP()
+		#self.add_labelC()
 
 	def add_contenedor(self):	
 		self.contenedor = Gtk.Grid()
@@ -29,7 +29,7 @@ class MiVentanita(Gtk.Window):
 		self.contenedor.attach(self.entradaA, 0, 0, 3, 1)
 		self.entrada1 = Gtk.Entry()
 		self.contenedor.attach(self.entrada1, 3, 0, 1, 1)
-
+	'''
 	def add_labelA(self):	
 		self.labelA = Gtk.Label('Sumatoria_Activos')
 		self.contenedor.attach(self.labelA, 3, 1, 1, 1)
@@ -39,17 +39,17 @@ class MiVentanita(Gtk.Window):
 			total = float(lista_A[1])
 			temp += total
 
-		print temp
-		mensaje = 'Sumatoria_Activos {0}'
+		#print temp
+		mensaje = 'Sumatoria_Activos => {0}'
 		self.labelA.set_text(mensaje.format(str(temp)))
 
-
+	'''
 	def add_entradaP(self):	
 		self.entradaP = Gtk.Entry()
 		self.contenedor.attach(self.entradaP, 0, 5, 3, 1)
 		self.entrada2 = Gtk.Entry()
 		self.contenedor.attach(self.entrada2, 3, 5, 1, 1)
-
+	'''
 	def add_labelP(self):	
 		self.labelP = Gtk.Label('Sumatoria_Pasivos')
 		self.contenedor.attach(self.labelP, 3, 6, 1, 1)
@@ -57,9 +57,10 @@ class MiVentanita(Gtk.Window):
 	def add_labelC(self):	
 		self.labelC = Gtk.Label('Total_Capital')
 		self.contenedor.attach(self.labelC, 3, 8, 1, 1)
-
+	'''
 	def add_botonA(self):	
 		self.botonA = Gtk.Button('Activos')
+		self.labelA = Gtk.Label()
 		self.contenedor.attach_next_to(self.botonA, self.entradaA,
 			Gtk.PositionType.BOTTOM,
 			1,
@@ -67,15 +68,22 @@ class MiVentanita(Gtk.Window):
 
 		self.botonA.connect('clicked', self.add_filaA)
 
+		self.label100 = Gtk.Label('Sumatoria_Activos')
+		self.contenedor.attach(self.label100, 3, 1, 1, 1)
+
 
 	def add_botonP(self):	
 		self.botonP = Gtk.Button('Pasivos')
+		self.labelP = Gtk.Label()
 		self.contenedor.attach_next_to(self.botonP, self.entradaP,
 			Gtk.PositionType.BOTTOM,
 			1,
 			2)
 
 		self.botonP.connect('clicked', self.add_filaP)
+
+		self.label200 = Gtk.Label('Sumatoria_Pasivos')
+		self.contenedor.attach(self.label200, 3, 6, 1, 1)
 
 	def add_listaA(self):	
 		self.modeloA = Gtk.ListStore(str, float)
@@ -112,6 +120,23 @@ class MiVentanita(Gtk.Window):
 			1)
 
 	def add_filaA(self, btn):	
+		self.tempA = 0
+		if self.entradaA.get_text() and self.entrada1.get_text():
+			textoA = self.entradaA.get_text()
+			numeroA = self.entrada1.get_text()
+			self.modeloA.append([textoA, float(numeroA)])
+			self.entradaA.set_text('')
+			self.entrada1.set_text('')
+
+			for filaA in self.modeloA:
+				total = float(filaA[1])
+				self.tempA += total
+				mensaje = 'Sumatoria_Activos => {0}'
+				self.label100.set_text(mensaje.format(str(self.tempA)))
+
+		else:		
+			self.labelA.set_markup('Introduzca solo numeros enteros POR FAVOR')
+
 		textoA = self.entradaA.get_text()
 		numeroA = self.entrada1.get_text()
 		self.modeloA.append([textoA, float(numeroA)])
