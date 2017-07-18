@@ -2,11 +2,11 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk
 
-class MiVentanita(Gtk.Window):
+class MiVentanita(Gtk.ApplicationWindow):
 	def __init__(self, *args, **kwargs):
 		super(MiVentanita, self).__init__(*args, **kwargs)
 		self.set_default_size(500, 300)
-		self.connect('delete-event', Gtk.main_quit)
+		#self.connect('delete-event', Gtk.main_quit)
 		self.add_contenedor()
 		self.add_entradaA()
 		self.add_entradaP()
@@ -14,9 +14,6 @@ class MiVentanita(Gtk.Window):
 		self.add_botonP()
 		self.add_listaA()
 		self.add_listaP()
-		#self.add_labelA()
-		#self.add_labelP()
-		#self.add_labelC()
 
 	def add_contenedor(self):	
 		self.contenedor = Gtk.Grid()
@@ -29,35 +26,14 @@ class MiVentanita(Gtk.Window):
 		self.contenedor.attach(self.entradaA, 0, 0, 3, 1)
 		self.entrada1 = Gtk.Entry()
 		self.contenedor.attach(self.entrada1, 3, 0, 1, 1)
-	'''
-	def add_labelA(self):	
-		self.labelA = Gtk.Label('Sumatoria_Activos')
-		self.contenedor.attach(self.labelA, 3, 1, 1, 1)
-		
-		temp = 0
-		for lista_A in self.modeloA:
-			total = float(lista_A[1])
-			temp += total
+	
 
-		#print temp
-		mensaje = 'Sumatoria_Activos => {0}'
-		self.labelA.set_text(mensaje.format(str(temp)))
-
-	'''
 	def add_entradaP(self):	
 		self.entradaP = Gtk.Entry()
 		self.contenedor.attach(self.entradaP, 0, 5, 3, 1)
 		self.entrada2 = Gtk.Entry()
 		self.contenedor.attach(self.entrada2, 3, 5, 1, 1)
-	'''
-	def add_labelP(self):	
-		self.labelP = Gtk.Label('Sumatoria_Pasivos')
-		self.contenedor.attach(self.labelP, 3, 6, 1, 1)
-
-	def add_labelC(self):	
-		self.labelC = Gtk.Label('Total_Capital')
-		self.contenedor.attach(self.labelC, 3, 8, 1, 1)
-	'''
+	
 	def add_botonA(self):	
 		self.botonA = Gtk.Button('Activos')
 		self.labelA = Gtk.Label()
@@ -135,16 +111,35 @@ class MiVentanita(Gtk.Window):
 				self.label100.set_text(mensaje.format(str(self.tempA)))
 
 		else:		
-			self.labelA.set_markup('Introduzca solo numeros enteros POR FAVOR')
-
+			self.labelA.set_markup('Introduzca solo numeros reales POR FAVOR')
+		'''
 		textoA = self.entradaA.get_text()
 		numeroA = self.entrada1.get_text()
 		self.modeloA.append([textoA, float(numeroA)])
+		'''
 
 	def add_filaP(self, btn):		
+		self.tempP = 0
+		if self.entradaP.get_text() and self.entrada2.get_text():
+			textoP = self.entradaP.get_text()
+			numeroP = self.entrada2.get_text()
+			self.modeloP.append([textoP, float(numeroP)])
+			self.entradaP.set_text('')
+			self.entrada2.set_text('')
+
+			for filaP in self.modeloP:
+				total = float(filaP[1])
+				self.tempP += total
+				mensaje = 'Sumatoria_Pasivos => {0}'
+				self.label200.set_text(mensaje.format(str(self.tempP)))
+
+		else:		
+			self.labelP.set_markup('Introduzca solo numeros reales POR FAVOR')
+		'''
 		textoP = self.entradaP.get_text()
 		numeroP = self.entrada2.get_text()
 		self.modeloP.append([textoP, float(numeroP)])
+		'''
 
 if __name__ == '__main__':		
 	ventana = MiVentanita()
