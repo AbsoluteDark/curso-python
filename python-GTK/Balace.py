@@ -14,6 +14,7 @@ class MiVentanita(Gtk.ApplicationWindow):
 		self.add_botonP()
 		self.add_listaA()
 		self.add_listaP()
+		#self.add_Capita()
 
 	def add_contenedor(self):	
 		self.contenedor = Gtk.Grid()
@@ -112,11 +113,6 @@ class MiVentanita(Gtk.ApplicationWindow):
 
 		else:		
 			self.labelA.set_markup('Introduzca solo numeros reales POR FAVOR')
-		'''
-		textoA = self.entradaA.get_text()
-		numeroA = self.entrada1.get_text()
-		self.modeloA.append([textoA, float(numeroA)])
-		'''
 
 	def add_filaP(self, btn):		
 		self.tempP = 0
@@ -135,11 +131,7 @@ class MiVentanita(Gtk.ApplicationWindow):
 
 		else:		
 			self.labelP.set_markup('Introduzca solo numeros reales POR FAVOR')
-		'''
-		textoP = self.entradaP.get_text()
-		numeroP = self.entrada2.get_text()
-		self.modeloP.append([textoP, float(numeroP)])
-		'''
+
 
 if __name__ == '__main__':		
 	ventana = MiVentanita()

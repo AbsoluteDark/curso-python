@@ -1,0 +1,12 @@
+<?xml version="1.0"  enconding='UTF-8' ?>
+<interface>
+	<menu id="App_Menu">
+		<section>
+			<item>
+				<attribute name="action">app.balance</attribute>
+				<attribute name="label" translatable="no">Balance</attribute>
+			</item>
+		</section>
+	</menu>
+</interface>
+				
